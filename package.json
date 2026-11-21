@@ -1,0 +1,44 @@
+{
+  "name": "kisisel-harcamalarim",
+  "productName": "Kişisel Harcamalarım",
+  "version": "1.0.0",
+  "description": "İnternetsiz çalışan kişisel bütçe ve harcama takip programı",
+  "main": "main.js",
+  "author": "Furkan Çelik",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac",
+    "dist:linux": "electron-builder --linux"
+  },
+  "devDependencies": {
+    "electron": "33.2.1",
+    "electron-builder": "25.1.8"
+  },
+  "build": {
+    "appId": "com.furkancelik.harcamalarim",
+    "productName": "Kişisel Harcamalarım",
+    "files": ["main.js", "preload.js", "src/**/*"],
+    "directories": { "output": "dist", "buildResources": "build" },
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Kişisel Harcamalarım",
+      "artifactName": "Kisisel-Harcamalarim-Kurulum-${version}.${ext}"
+    },
+    "portable": { "artifactName": "Kisisel-Harcamalarim-Tasinabilir-${version}.${ext}" },
+    "mac": { "target": "dmg", "icon": "build/icon.png", "category": "public.app-category.finance" },
+    "linux": { "target": "AppImage", "icon": "build/icon.png" }
+  }
+}
